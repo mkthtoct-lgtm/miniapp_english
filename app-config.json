@@ -1,0 +1,25 @@
+{
+  "app": {
+    "title": "HT Đại Dương",
+    "textColor": {
+      "light": "black",
+      "dark": "white"
+    },
+    "statusBar": "transparent",
+    "actionBarHidden": true,
+    "hideIOSSafeAreaBottom": true,
+    "hideAndroidBottomNavigationBar": false
+  },
+  "pages": [
+    "pages/index"
+  ],
+  "webViewDomains": [
+    "https://miniapp.hto.edu.vn",
+    "https://flagcdn.com",
+    "https://htogroup.com.vn",
+    "https://encrypted-tbn0.gstatic.com"
+  ],
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": []
+}

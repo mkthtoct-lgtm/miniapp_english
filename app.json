@@ -1,0 +1,18 @@
+{
+  "app": {
+    "title": "HT Đại Dương",
+    "headerTitle": "HT Đại Dương",
+    "headerColor": "#1e3a8a",
+    "textColor": "white",
+    "statusBar": "normal",
+    "leftButton": "back"
+  },
+  "list": [
+    {
+      "path": "pages/index",
+      "name": "Home"
+    }
+  ],
+  "debug": false,
+  "appId": "35110100515344863"
+}
