@@ -46,6 +46,9 @@ const HomePage = () => {
   
   // Nhận dữ liệu (Tên, SĐT) từ Welcome truyền vào callback onStart
   const handleStart = (dataFromZalo) => {
+    // Thêm console.log để kiểm tra số điện thoại và tên lấy được từ Welcome
+    console.log("📞 Dữ liệu Zalo nhận được tại index.tsx:", dataFromZalo);
+
     const savedData = localStorage.getItem(STORAGE_KEY);
     
     if (savedData) {
@@ -54,6 +57,14 @@ const HomePage = () => {
         setCurrentScreen('language');
     } else {
         console.log("👉 Chưa có thông tin, lưu dữ liệu Zalo và hiện Form.");
+        
+        // Log xác nhận trước khi lưu vào state
+        if (dataFromZalo?.phoneNumber) {
+            console.log("✅ Đã lấy được SĐT thành công để truyền vào Form:", dataFromZalo.phoneNumber);
+        } else {
+            console.log("⚠️ Không có SĐT, Form sẽ để trống trường này.");
+        }
+
         // Lưu dữ liệu lấy được từ Zalo vào state tạm để truyền cho Form
         setZaloData(dataFromZalo); 
         setCurrentScreen('form');

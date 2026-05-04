@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { getPhoneNumber, getAccessToken, getUserInfo, followOA } from "zmp-sdk/apis";
 import { appConfig } from '../public/models/DataModel';
 
-const BACKEND_URL = "https://api.hto.edu.vn/get-phone";
+// Đã cập nhật sang API lấy SĐT mới
+const BACKEND_URL = "https://api.hto.edu.vn/get-phone-new";
 const OA_ID = "2112176407138597287";
 
 const HITO_STICKERS = [
@@ -54,9 +55,20 @@ const Welcome = ({ onStart }) => {
         
         const data = await response.json();
 
-        if (data.success && data.phoneNumber) {
-          userData.phoneNumber = data?.phoneNumber ? data.phoneNumber.replace(/^84/, '0') : '';          
+        // Áp dụng logic bóc tách SĐT linh hoạt mà bạn cung cấp
+        let fetchedPhone =
+          data?.phoneNumber ||
+          data?.data?.number ||
+          data?.data?.phone_number ||
+          data?.number ||
+          "";
+
+        if (fetchedPhone) {
+          // Vẫn giữ logic cũ: đổi đầu số 84 thành 0 cho thân thiện
+          userData.phoneNumber = fetchedPhone.replace(/^84/, '0');          
           console.log("✅ Lấy SĐT thành công:", userData.phoneNumber);
+        } else {
+          console.warn("⚠️ Không tìm thấy SĐT trong dữ liệu trả về:", data);
         }
       } catch (err) {
         console.error("❌ Lỗi lấy SĐT (User từ chối hoặc lỗi mạng):", err);
@@ -67,6 +79,7 @@ const Welcome = ({ onStart }) => {
     } finally {
       setIsLoading(false);
       setShowTerms(false);
+      // Trả object có cả tên và SĐT về cho trang index.tsx
       onStart(userData); 
     }
   };
